@@ -457,7 +457,7 @@ function toStringList(arr) {
  *    ]
  */
 function sortCitiesArray(arr) {
-  const compareCountry = function (country1, country2) {
+  const compareCountry = (country1, country2) => {
     if (country1.country === country2.country) {
       if (country1.city > country2.city) {
         return 1;
@@ -496,14 +496,12 @@ function sortCitiesArray(arr) {
 function getIdentityMatrix(n) {
   const innerArr = Array(n).fill(0);
   const outputArr = Array(n).fill(innerArr);
-  const innerArrFunction = function (innerArr2, indexForChange) {
-    return innerArr2.map((arrElem, index) => {
-      if (index === indexForChange) {
-        return 1;
-      }
-      return arrElem;
-    });
-  };
+  const innerArrFunction = (innerArr2, indexForChange) => innerArr2.map((arrElem, index) => {
+    if (index === indexForChange) {
+      return 1;
+    }
+    return arrElem;
+  });
 
   return outputArr.map((arrElem, index) => innerArrFunction(arrElem, index));
 }

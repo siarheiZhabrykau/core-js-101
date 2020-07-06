@@ -142,7 +142,7 @@ function isTriangle(a, b, c) {
  *
  */
 function doRectanglesOverlap(rect1, rect2) {
-  const verifier = function (top, left, rect) {
+  const verifier = (top, left, rect) => {
     const rect1CeilRightHoriz = rect.top + rect1.width;
     const rect1CeilVert = rect.left + rect1.height;
     return (top >= rect.top && top <= rect1CeilRightHoriz)
@@ -359,10 +359,9 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-  const getDigitSum = function (stringRepresentation) {
-    return stringRepresentation.split('').map((arrElem) => parseInt(arrElem, 10))
-      .reduce((accum, curr) => accum + curr);
-  };
+  const getDigitSum = (stringRepresentation) => stringRepresentation.split('').map((arrElem) => parseInt(arrElem, 10))
+    .reduce((accum, curr) => accum + curr);
+
   let currValue = getDigitSum(Number(num).toString());
   while (currValue > 9) {
     currValue = getDigitSum(Number(currValue).toString());
@@ -549,28 +548,22 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-  const containsOnlyChar = function (doubleArr, char) {
-    return (doubleArr[0][0] === char && doubleArr[0][1] === char && doubleArr[0][2] === char)
-      || (doubleArr[1][0] === char && doubleArr[1][1] === char && doubleArr[1][2] === char)
-      || (doubleArr[2][0] === char && doubleArr[2][1] === char && doubleArr[2][2] === char);
-  };
+  const containsOnlyChar = (doubleArr, char) => (doubleArr[0][0] === char
+    && doubleArr[0][1] === char && doubleArr[0][2] === char)
+    || (doubleArr[1][0] === char && doubleArr[1][1] === char && doubleArr[1][2] === char)
+    || (doubleArr[2][0] === char && doubleArr[2][1] === char && doubleArr[2][2] === char);
 
-  const containsOnlyCharVert = function (doubleArr, char) {
-    return (doubleArr[0][0] === char && doubleArr[1][0] === char && doubleArr[2][0] === char)
-      || (doubleArr[0][1] === char && doubleArr[1][1] === char && doubleArr[2][1] === char)
-      || (doubleArr[0][2] === char && doubleArr[1][2] === char && doubleArr[2][2] === char);
-  };
+  const containsOnlyCharVert = (doubleArr, char) => (doubleArr[0][0] === char
+    && doubleArr[1][0] === char && doubleArr[2][0] === char)
+    || (doubleArr[0][1] === char && doubleArr[1][1] === char && doubleArr[2][1] === char)
+    || (doubleArr[0][2] === char && doubleArr[1][2] === char && doubleArr[2][2] === char);
 
-  const containsCharOnDiag = function (doubleArr, char) {
-    return (doubleArr[0][0] === char && doubleArr[1][1] === char
-      && doubleArr[2][2]) || (doubleArr[0][2] === char && doubleArr[1][1] === char
-        && doubleArr[2][0]);
-  };
+  const containsCharOnDiag = (doubleArr, char) => (doubleArr[0][0] === char
+    && doubleArr[1][1] === char && doubleArr[2][2])
+    || (doubleArr[0][2] === char && doubleArr[1][1] === char && doubleArr[2][0]);
 
-  const weirdCase = function (doubleArr, char) {
-    return doubleArr[0][0] === char && doubleArr[0][2] === char
+  const weirdCase = (doubleArr, char) => doubleArr[0][0] === char && doubleArr[0][2] === char
       && doubleArr[1][1] === char && doubleArr[1][2] === char && doubleArr[2][1] === char;
-  };
 
   if (weirdCase(position, 'X')) {
     return undefined;
